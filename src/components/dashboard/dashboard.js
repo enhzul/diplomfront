@@ -20,6 +20,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="table">
+
           <p>Хэрэглэгч</p>
           <Users />
         </div>

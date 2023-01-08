@@ -127,13 +127,13 @@ const TableList = () => {
   });
   const columns = [
     {
-      title: "Овог",
+      title: "Нэр",
       dataIndex: "first_name",
       key: "first_name",
       ...getColumnSearchProps("first_name"),
     },
     {
-      title: "Нэр",
+      title: "Овог",
       dataIndex: "last_name",
       key: "last_name",
       ...getColumnSearchProps("last_name"),

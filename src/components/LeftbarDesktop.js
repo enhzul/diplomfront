@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import AuthService from "../api/auth.service";
+
 const LeftbarDesktop = ({}) => {
   const [user, setUser] = useState();
   const axiosPrivate = useAxiosPrivate();
@@ -31,6 +32,12 @@ const LeftbarDesktop = ({}) => {
   const logOut = () => {
     AuthService.logout();
   };
+  
+  const [visibility, setVisibility] = useState(false);
+
+  const popupCloseHandler = () => {
+    setVisibility(false);
+  };
 
   // const { user } = React.useContext(getContext)
 
@@ -40,12 +47,12 @@ const LeftbarDesktop = ({}) => {
         <div className="head">
           <div className="logo">
             <Link to={"/dashboard"}>
-              <img src="/img/download.png" />
+              <img id="SchoolImg" src="/img/download.png" />
             </Link>
           </div>
           <div className="menu-list">
             <ul>
-              <div className="caption">МУБИС</div>
+              <div className="caption" id="caption">Монгол улсын боловсролын их сургууль</div>
               <li>
                 <Link to="/">
                   <div className="menu">
@@ -82,19 +89,31 @@ const LeftbarDesktop = ({}) => {
         </div>
         <div className="foot">
           <div className="profile">
-            <img src="/img/userlogo.png" />
+            <div className="dropdown">
+            <button className="dropbtn "><img src="/img/userlogo.png" /></button>
+            <div className="dropdown-content">
+              <a href="/profile">Профайл засах</a>
+              <a href="/changepassword">Тохиргоо</a>
+              <a href="/login" onClick={logOut}>Гарах</a>
+            </div>
+            </div>
             <div className="username">
               {user?.first_name} {user?.last_name}
             </div>
             <div className="job-title">{user?.zeregName}</div>
           </div>
-          <div className="settings">
+          {/* <div className="settings">
             <Link to="/profile">
               <h5>Профайл засах</h5>
             </Link>
             <Link to="/login" onClick={logOut}>
               <h5>Гарах</h5>
             </Link>
+          </div> */}
+    
+          <div>
+            <br></br>
+            <br></br>
           </div>
         </div>
       </div>
@@ -246,7 +265,6 @@ const Container = styled.div`
     .foot {
       margin-top: 15px;
       .settings {
-        padding-top: 25px;
         h5 {
           font-family: "Roboto";
           font-size: 12px;
@@ -274,7 +292,7 @@ const Container = styled.div`
           height: 80px;
           border-radius: 50%;
           margin-top: 30px;
-          margin-bottom: 14px;
+          margin-bottom: 8px;
         }
         .username {
           font-family: "Roboto";
@@ -307,4 +325,49 @@ const Container = styled.div`
       display: flex;
     }
   }
+  #SchoolImg{
+    width: 120px;
+    height: 120px;
+    padding: 15px;
+    /* margin: 22px; */
+    padding-top: 55px;
+  }
+  #caption{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 30px;
+  }
+  .dropbtn {
+    background-color: white;
+    color: white;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: relative ;
+    background-color: #f1f1f1;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius:10px;
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 16px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius:10px;
+  }
+  .dropdown-content a:hover {background-color: white;}
+
+  .dropdown:hover .dropdown-content {display: block;}
+
+  .dropdown:hover .dropbtn {background-color: white;}
 `;

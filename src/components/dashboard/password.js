@@ -137,7 +137,7 @@ export default Settings;
 
 const Container = styled.div`
   font-family: "Roboto", sans-serif;
-  background-color: yellow;
+  background-color: white;
   border-radius: 8px;
   margin-left: 20px;
   overflow-y: auto;
