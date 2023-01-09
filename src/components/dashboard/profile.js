@@ -23,6 +23,7 @@ const tailLayout = {
 const Profile = () => {
   const axiosPrivate = useAxiosPrivate();
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log("Local User ", user)
   const id = JSON.parse(localStorage.getItem("id"));
   const [success, setSuccess] = useState(false);
   const [form] = Form.useForm();
@@ -39,6 +40,10 @@ const Profile = () => {
       console.log(error);
     }
   };
+  const selectOptions = [
+    { value: 1, label :"Тийм"},
+    { value: 0, label :"Үгүй"}
+  ]
   const onReset = () => {
     form.resetFields();
   };
@@ -131,16 +136,24 @@ const Profile = () => {
           <Form.Item name="zeregName" label="Зэрэг">
             <Input defaultValue={user[0].zeregName} disabled />
           </Form.Item>
-          
+          <Form.Item name="visible" label="Нийтэд харагдах эсэх">
+          <Select
+              placeholder="Нийтэд харагдах эсэхийг сонгоно уу"
+              defaultValue={user[0].visible}
+              rules={[
+                {
+                  required: true,
+                  message: "Та нийтэд харагдах эсэхийг сонгоно уу",
+                },
+              ]}
+              options={selectOptions}
+            >
+            </Select>
+          </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>  
-            <Link to="/changepassword">
-          <a target="_blank">
-            <div className="link" >Тохиргоо</div>
-          </a>
-        </Link>
           </Form.Item>
         </Form>
       </Container>
