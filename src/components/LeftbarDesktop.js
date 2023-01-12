@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import AuthService from "../api/auth.service";
+import { UserOutlined, SettingOutlined, LogoutOutlined ,SolutionOutlined,MailOutlined,
+  PhoneOutlined ,EyeInvisibleOutlined,EyeOutlined} from '@ant-design/icons';
 
 const LeftbarDesktop = ({}) => {
   const [user, setUser] = useState();
@@ -92,9 +94,9 @@ const LeftbarDesktop = ({}) => {
             <div className="dropdown">
             <button className="dropbtn "><img src="/img/userlogo.png" /></button>
             <div className="dropdown-content">
-              <a href="/profile">Профайл засах</a>
-              <a href="/changepassword">Тохиргоо</a>
-              <a href="/login" onClick={logOut}>Гарах</a>
+              <a href="/profile"><span><UserOutlined/></span>  Профайл засах</a>
+              <a href="/changepassword"><span><SettingOutlined /></span> Тохиргоо</a>
+              <a href="/login" onClick={logOut}><span><LogoutOutlined /></span> Гарах</a>
             </div>
             </div>
             <div className="username">
