@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Root from "../../components/Root";
 import { Link } from "react-router-dom";
-import { Button, Form, Input, Select, Alert } from "antd";
+import { Button, Form, Input, Select, Alert, Col, Row,Switch , Image, Avatar, Space} from "antd";
+import { UserOutlined, BankOutlined, FieldNumberOutlined,SolutionOutlined,MailOutlined,
+  PhoneOutlined ,EyeInvisibleOutlined,EyeOutlined} from '@ant-design/icons';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const { Option } = Select;
@@ -56,28 +58,45 @@ const Profile = () => {
   return (
     <Root>
       <Container>
-        <div className="pro">
+        {/* <div className="pro">
           <div className="profile-image">
-            {/* <div className='img'>
-                  <img src={Url2(user.details.picturetumb, true)}/>
-              </div> */}
+            <div className='img'>
+                  <img src="/img/userlogo.png"/>
+              </div>
           </div>
-        </div>
+        </div> */}
         {success ? <Alert message="Амжилттай" type="success" /> : null}
         <br></br>
+        <div class="profile-edit">
         <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+          <Row>
+            <Col span={1}></Col>
+          <Col span={10}>
+          <Row>
+          <Col span={7}></Col>
+            <Col span={5}>
+            <Avatar src="/img/userlogo.png" size={180}/>
+            </Col>
+          </Row>
+          <br></br>
           <Form.Item name="code" label="Оюутны код">
-            <Input defaultValue={user[0].userName} disabled />
+            <Input defaultValue={user[0].userName} disabled prefix={<UserOutlined />} />
           </Form.Item>
           <Form.Item name="code" label="Тэнхим">
-            <Input defaultValue={user[0].dp_name} disabled />
+            <Input defaultValue={user[0].dp_name} disabled prefix={<BankOutlined />}/>
           </Form.Item>
           <Form.Item name="code" label="Регистрийн дугаар">
-            <Input defaultValue={user[0].rd} disabled />
+            <Input defaultValue={user[0].rd} disabled prefix={<FieldNumberOutlined />}/>
           </Form.Item>
+          <Form.Item name="zeregName" label="Зэрэг">
+            <Input defaultValue={user[0].zeregName} disabled prefix={<SolutionOutlined />}/>
+          </Form.Item>
+          </Col>
+          <Col span={12}>
           <Form.Item
             name="lastname"
             label="Овог"
+
             rules={[
               {
                 required: true,
@@ -85,7 +104,7 @@ const Profile = () => {
               },
             ]}
           >
-            <Input defaultValue={user[0].last_name} />
+            <Input defaultValue={user[0].last_name} prefix={<UserOutlined />} />
           </Form.Item>
           <Form.Item
             name="firstname"
@@ -97,7 +116,7 @@ const Profile = () => {
               },
             ]}
           >
-            <Input defaultValue={user[0].first_name} />
+            <Input defaultValue={user[0].first_name} prefix={<UserOutlined />} />
           </Form.Item>
           <Form.Item
             name="email"
@@ -109,7 +128,7 @@ const Profile = () => {
               },
             ]}
           >
-            <Input defaultValue={user[0].email} />
+            <Input defaultValue={user[0].email} prefix={<MailOutlined />}/>
           </Form.Item>
           <Form.Item
             name="phone"
@@ -121,7 +140,7 @@ const Profile = () => {
               },
             ]}
           >
-            <Input defaultValue={user[0].phone} />
+            <Input defaultValue={user[0].phone} prefix={<PhoneOutlined />}/>
           </Form.Item>
           <Form.Item name="gender" label="Gender">
             <Select
@@ -129,33 +148,28 @@ const Profile = () => {
               allowClear
               defaultValue={user[0].gender}
             >
-              <Option value="male">male</Option>
-              <Option value="female">female</Option>
+              <Option value="male">Эрэгтэй</Option>
+              <Option value="female">Эмэгтэй</Option>
             </Select>
           </Form.Item>
-          <Form.Item name="zeregName" label="Зэрэг">
-            <Input defaultValue={user[0].zeregName} disabled />
-          </Form.Item>
+          
           <Form.Item name="visible" label="Нийтэд харагдах эсэх">
-          <Select
-              placeholder="Нийтэд харагдах эсэхийг сонгоно уу"
-              defaultValue={user[0].visible}
-              rules={[
-                {
-                  required: true,
-                  message: "Та нийтэд харагдах эсэхийг сонгоно уу",
-                },
-              ]}
-              options={selectOptions}
-            >
-            </Select>
+          <Switch
+            checkedChildren={<EyeOutlined />}
+            unCheckedChildren={<EyeInvisibleOutlined />}
+            defaultChecked
+            />
           </Form.Item>
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
-              Submit
+              Хадгалах
             </Button>  
           </Form.Item>
+          </Col>
+          <Col span={1}></Col>
+          </Row>
         </Form>
+        </div>
       </Container>
     </Root>
   );
@@ -237,5 +251,8 @@ const Container = styled.div`
       font-weight: 500;
       border: none;
     }
+  }
+  .profile-edit{
+    padding-top: 100px;
   }
 `;
